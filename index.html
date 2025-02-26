@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SoundWave - Discover and enjoy your favorite music with premium features and personalized experience">
+    <title>SoundWave - Discover Your Rhythm</title>
+    <!-- Preconnect to CDNs for performance improvement -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Original stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #8E2DE2;
+            --secondary: #4A00E0;
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --success: #00f2fe;
+            --gradient: linear-gradient(45deg, var(--primary), var(--secondary));
+            --glass: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+        }
+
+        body {
+            background-color: var(--dark);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: rgba(5, 5, 5, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--light);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links .btn {
+            padding: 10px 24px;
+            font-size: 15px;
+        }
+
+        .nav-links .btn.btn-outline {
+            padding: 8px 22px;
+        }
+
+        .nav-links li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links li a:not(.btn) {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links li a:not(.btn):hover {
+            color: var(--primary);
+        }
+
+        .nav-links li a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:not(.btn):hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--light);
+            padding: 12px 30px;
+        }
+
+        .btn-outline:hover {
+            background: var(--gradient);
+            border-color: transparent;
+        }
+
+        /* Hero Section Update */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--dark);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+            min-width: 100%;
+            min-height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.8),
+                rgba(74, 0, 224, 0.4)
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 650px;
+            margin-left: 50px;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .hero-content * {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .hero-logo {
+            font-size: 60px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-buttons .btn {
+            padding: 16px 36px;
+            font-size: 17px;
+            min-width: 180px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            background: var(--gradient);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-buttons .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .hero-buttons .btn:hover::before {
+            opacity: 1;
+        }
+
+        .hero-buttons .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            color: var(--light);
+        }
+
+        .hero-buttons .btn-outline:hover {
+            background: var(--gradient);
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        /* Updated Genre Section Styles */
+        .genres {
+            padding: 120px 0;
+            background-color: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        .genre-swiper {
+            margin-top: 50px;
+            padding: 20px 0 60px;
+            overflow: visible;
+            width: 100%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .swiper-slide {
+            width: 400px;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0.3;
+            transform: scale(0.8);
+        }
+
+        .genre-card {
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-size: cover;
+            background-position: center;
+            transform: translateZ(0);
+            will-change: transform;
+            margin: 0 auto;
+        }
+
+        .genre-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .genre-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, 
+                rgba(0,0,0,0.95) 0%, 
+                rgba(0,0,0,0.8) 40%, 
+                rgba(0,0,0,0.4) 70%,
+                transparent 100%);
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .genre-overlay h3 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--light);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .genre-overlay p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .genre-overlay p i {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Swiper improvements */
+        .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .swiper-slide-active .genre-card {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .swiper-slide-prev,
+        .swiper-slide-next {
+            opacity: 0.7;
+            transform: scale(0.9);
+        }
+
+        /* Navigation buttons */
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .genre-swiper:hover .swiper-button-next,
+        .genre-swiper:hover .swiper-button-prev {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 24px;
+            color: var(--light);
+            font-weight: bold;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Updated pagination style */
+        .swiper-pagination {
+            position: relative;
+            bottom: -30px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .swiper-pagination-bullet {
+            width: 40px;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .swiper-pagination-bullet-active {
+            width: 60px;
+            background: var(--gradient);
+            opacity: 1;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: #191919;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: rgba(30, 30, 40, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            position: relative;
+            z-index: 1;
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 28px;
+            color: var(--light);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            position: relative;
+            z-index: 1;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover h3 {
+            transform: translateY(-3px);
+        }
+
+        .feature-card p {
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 120px 0;
+            background-color: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(74, 0, 224, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background-color: rgba(25, 25, 30, 0.5);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(30, 30, 40, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            position: relative;
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .featured-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+        }
+
+        .pricing-card h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: white;
+            position: relative;
+            z-index: 1;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .price span {
+            font-size: 16px;
+            font-weight: normal;
+            color: rgba(255, 255, 255, 0.7);
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card .btn {
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+            position: relative;
+            z-index: 10;
+            border: none;
+            font-weight: 600;
+            min-width: 200px;
+        }
+
+        .cta .btn:hover {
+            background: var(--light);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #080808;
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 90%, rgba(142, 45, 226, 0.1), transparent 50%);
+            pointer-events: none;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-heading {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links li a:hover {
+            color: var(--light);
+        }
+
+        .footer-links li a:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon i {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icon:hover::before {
+            opacity: 1;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sound Wave Animation Update */
+        .sound-wave {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            display: flex;
+            align-items: flex-end;
+            height: 100px;
+            width: 200px;
+            gap: 5px;
+        }
+
+        .sound-wave-bar {
+            flex: 1;
+            background: var(--gradient);
+            border-radius: 3px;
+            animation: sound-wave-anim 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes sound-wave-anim {
+            0% { transform: scaleY(0.2); }
+            100% { transform: scaleY(1); }
+        }
+
+        /* Mobile Responsive Updates */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 30px;
+                margin: 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .sound-wave {
+                display: none;
+            }
+
+            .genre-card {
+                height: 250px;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .nav-links li a {
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: relative;
+                z-index: 200;
+            }
+            
+            .nav-links {
+                display: none;
+                position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+                height: 100vh;
+                background-color: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 100;
+                gap: 30px;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 20px;
+            }
+            
+            .hero-logo {
+                font-size: 48px;
+            }
+            
+            .hero p {
+                font-size: 14px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+
+        /* Animation classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .fade-in {
+            opacity: 0;
+        }
+
+        /* Text split animation */
+        .splitting .char {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+
+        .splitting.animated .char {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 101;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 1;
+        }
+
+        .scroll-indicator span {
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .scroll-indicator .mouse::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: scroll-down 2s infinite;
+        }
+
+        @keyframes scroll-down {
+            0% {
+            opacity: 1;
+                transform: translate(-50%, 0);
+            }
+            80% {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+        }
+
+        /* Hero button overrides */
+        .hero-buttons .btn {
+            padding: 16px 36px;
+            font-size: 17px;
+            min-width: 180px;
+        }
+
+        /* Mobile button adjustments */
+        @media (max-width: 768px) {
+            .nav-links .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+                min-width: 120px;
+            }
+
+            .hero-buttons .btn {
+                padding: 14px 30px;
+            font-size: 16px;
+                min-width: 140px;
+            }
+        }
+
+        .genre-description {
+            margin-top: 15px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .genre-card:hover .genre-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .genre-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #614385, #516395);
+            z-index: 1;
+        }
+
+        .genre-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -80%);
+            font-size: 60px;
+            color: rgba(255,255,255,0.8);
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .genre-card:hover .genre-icon {
+            transform: translate(-50%, -90%) scale(1.1);
+            color: rgba(255,255,255,1);
+        }
+
+        .genre-overlay {
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo" aria-label="SoundWave Homepage">Sound<span>Wave</span></a>
+                <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#genres">Genres</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#" class="btn btn-outline">Log In</a></li>
+                    <li><a href="#" class="btn">Sign Up Free</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-logo">Sound<span>Wave</span></div>
+                <p>Dive into a world of endless musical possibilities with SoundWave. Discover new artists, create personalized playlists, and experience music in stunning HD quality.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn">Start Free Trial</a>
+                    <a href="#features" class="btn btn-outline">Explore Features</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Why Choose SoundWave?</h2>
+                <p>Discover what makes our platform different from the rest</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Mood Detection</h3>
+                    <p>Our exclusive AI analyzes your mood and creates the perfect playlist to match how you're feeling.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3>HD Audio Quality</h3>
+                    <p>Experience crystal-clear sound with our proprietary audio enhancement technology.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Live Collaborative Playlists</h3>
+                    <p>Create playlists with friends in real-time and see what they're adding as it happens.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Artist Connect</h3>
+                    <p>Get exclusive content and direct messages from your favorite artists.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Seamless Integration</h3>
+                    <p>Connect with all your devices and smart home systems for uninterrupted listening.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Music DNA Analysis</h3>
+                    <p>Discover your unique music taste profile and get personalized recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Genres Section -->
+    <section class="genres" id="genres">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Explore Music Genres</h2>
+                <p>Dive into a world of endless musical possibilities</p>
+            </div>
+            <div class="swiper genre-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="genre-card" data-genre="rock">
+                            <img src="img/genres/rock.jpg" alt="Rock Music" loading="lazy">
+                            <div class="genre-overlay">
+                                <h3>Rock Music</h3>
+                                <p>
+                                    <i class="fas fa-music"></i>
+                                    <span>1,245 playlists</span>
+                                </p>
+                                <div class="genre-description">
+                                    Experience the power of electric guitars, drums, and raw energy.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="genre-card" data-genre="hiphop">
+                            <div class="genre-gradient"></div>
+                            <i class="fas fa-microphone genre-icon"></i>
+                            <div class="genre-overlay">
+                                <h3>Hip Hop</h3>
+                                <p>
+                                    <i class="fas fa-headphones"></i>
+                                    <span>987 playlists</span>
+                                </p>
+                                <div class="genre-description">
+                                    Dive into the world of beats, rhymes, and urban culture.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="genre-card" data-genre="electronic">
+                            <div class="genre-card-inner">
+                                <img src="img/genres/electronic.jpg" alt="Electronic Music" loading="lazy">
+                            <div class="genre-overlay">
+                                <h3>Electronic</h3>
+                                    <p><i class="fas fa-compact-disc"></i> 1,543 playlists</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="genre-card" data-genre="jazz">
+                            <div class="genre-card-inner">
+                                <img src="img/genres/jazz.jpg" alt="Jazz Music" loading="lazy">
+                            <div class="genre-overlay">
+                                <h3>Jazz</h3>
+                                    <p><i class="fas fa-music"></i> 756 playlists</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="genre-card" data-genre="classical">
+                            <div class="genre-card-inner">
+                                <img src="img/genres/classical.jpg" alt="Classical Music" loading="lazy">
+                            <div class="genre-overlay">
+                                <h3>Classical</h3>
+                                    <p><i class="fas fa-music"></i> 892 playlists</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="genre-card" data-genre="country">
+                            <div class="genre-card-inner">
+                                <img src="img/genres/country.jpg" alt="Country Music" loading="lazy">
+                            <div class="genre-overlay">
+                                <h3>Country</h3>
+                                    <p><i class="fas fa-guitar"></i> 643 playlists</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Choose Your Plan</h2>
+                <p>Flexible options to match your music lifestyle</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0 <span>/month</span></div>
+                    <p>Perfect for casual listeners</p>
+                    <ul class="pricing-features">
+                        <li>Ad-supported listening</li>
+                        <li>Basic audio quality</li>
+                        <li>Limited skips</li>
+                        <li>Mobile app access</li>
+                        <li>Create playlists</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="featured-tag">Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">$9.99 <span>/month</span></div>
+                    <p>Enhanced experience for music lovers</p>
+                    <ul class="pricing-features">
+                        <li>Ad-free listening</li>
+                        <li>HD audio quality</li>
+                        <li>Unlimited skips</li>
+                        <li>Offline listening</li>
+                        <li>AI Mood Detection</li>
+                        <li>Live Collaborative Playlists</li>
+                    </ul>
+                    <a href="#" class="btn">Start 7-Day Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Family</h3>
+                    <div class="price">$14.99 <span>/month</span></div>
+                    <p>Share the experience with loved ones</p>
+                    <ul class="pricing-features">
+                        <li>All Premium features</li>
+                        <li>Up to 6 accounts</li>
+                        <li>Family Mix playlists</li>
+                        <li>Parental controls</li>
+                        <li>Artist Connect</li>
+                        <li>Music DNA Analysis</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Music Experience?</h2>
+            <p>Join millions of music lovers who have already discovered the SoundWave difference.</p>
+            <a href="#" class="btn">Get Started For Free</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <div class="footer-logo">Sound<span>Wave</span></div>
+                    <p>Revolutionizing the way you discover and enjoy music.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">For Artists</a></li>
+                        <li><a href="#">Developers</a></li>
+                        <li><a href="#">Advertising</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Copyright</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 SoundWave. All rights reserved.</p>
+                <p>Created by: Justin Marlo R. Sibonga</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add libraries before closing body tag -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+    
+    <!-- Initialize libraries -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+            const navLinksItems = document.querySelectorAll('.nav-links li a');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+                    
+                    // Toggle between hamburger and close icon
+                    if (this.querySelector('i').classList.contains('fa-bars')) {
+                        this.querySelector('i').classList.remove('fa-bars');
+                        this.querySelector('i').classList.add('fa-times');
+                    } else {
+                        this.querySelector('i').classList.add('fa-bars');
+                        this.querySelector('i').classList.remove('fa-times');
+                    }
+                });
+            }
+
+            // Close mobile menu when clicking on a link
+            navLinksItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                        if (mobileMenuBtn && mobileMenuBtn.querySelector('i')) {
+                            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                        }
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && 
+                    !event.target.closest('.nav-links') && 
+                    !event.target.closest('.mobile-menu-btn') && 
+                    navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    if (mobileMenuBtn && mobileMenuBtn.querySelector('i')) {
+                        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    }
+                }
+        });
+
+        // Initialize AOS with reduced motion preference check
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                offset: 100,
+                    once: true,
+                    disable: window.innerWidth < 768
+            });
+        }
+
+            // Fixed Swiper initialization with fallback
+            if (typeof Swiper !== 'undefined') {
+                try {
+            const genreSwiper = new Swiper('.genre-swiper', {
+                        slidesPerView: 'auto',
+                centeredSlides: true,
+                        initialSlide: 2,
+                loop: true,
+                        speed: 1000,
+                        spaceBetween: 40,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                            pauseOnMouseEnter: true
+                        },
+                        effect: 'coverflow',
+                        coverflowEffect: {
+                            rotate: 0,
+                            stretch: 0,
+                            depth: 200,
+                            modifier: 1,
+                            slideShadows: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                            renderBullet: function (index, className) {
+                                return '<span class="' + className + '"></span>';
+                            }
+                },
+                breakpoints: {
+                            320: {
+                                slidesPerView: 1,
+                                spaceBetween: 20
+                            },
+                    640: {
+                        slidesPerView: 2,
+                                spaceBetween: 30
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                                spaceBetween: 40
+                            }
+                        },
+                        grabCursor: true,
+                        keyboard: {
+                            enabled: true,
+                            onlyInViewport: true
+                        },
+                        mousewheel: false,
+                        observer: true,
+                        observeParents: true,
+                        on: {
+                            init: function() {
+                                setTimeout(() => {
+                                    this.update();
+                                }, 500);
+                            },
+                            resize: function() {
+                                this.update();
+                            }
+                        }
+                    });
+
+                    // Add hover effect to pause autoplay
+                    const swiperContainer = document.querySelector('.genre-swiper');
+                    if (swiperContainer) {
+                        swiperContainer.addEventListener('mouseenter', () => {
+                            genreSwiper.autoplay.stop();
+                        });
+                        swiperContainer.addEventListener('mouseleave', () => {
+                            genreSwiper.autoplay.start();
+                        });
+                    }
+                } catch (e) {
+                    console.error('Swiper initialization error:', e);
+                    
+                    // Fallback for when Swiper fails to initialize
+                    const genreCards = document.querySelectorAll('.genre-card');
+                    const genreContainer = document.querySelector('.genre-swiper');
+                    
+                    if (genreContainer && genreCards.length > 0) {
+                        genreContainer.style.display = 'grid';
+                        genreContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+                        genreContainer.style.gap = '30px';
+                        
+                        genreCards.forEach(card => {
+                            card.style.margin = '0 auto';
+                            card.style.width = '100%';
+                        });
+                    }
+                }
+            } else {
+                console.warn('Swiper library not loaded');
+                
+                // Fallback when Swiper is not available
+                const genreCards = document.querySelectorAll('.genre-card');
+                const genreContainer = document.querySelector('.genres .container');
+                
+                if (genreContainer && genreCards.length > 0) {
+                    const fallbackGrid = document.createElement('div');
+                    fallbackGrid.style.display = 'grid';
+                    fallbackGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+                    fallbackGrid.style.gap = '30px';
+                    fallbackGrid.style.marginTop = '50px';
+                    
+                    genreCards.forEach(card => {
+                        const wrapper = document.createElement('div');
+                        wrapper.appendChild(card.cloneNode(true));
+                        fallbackGrid.appendChild(wrapper);
+                    });
+                    
+                    // Replace swiper with fallback grid
+                    const swiperEl = document.querySelector('.genre-swiper');
+                    if (swiperEl) {
+                        swiperEl.parentNode.replaceChild(fallbackGrid, swiperEl);
+                    } else {
+                        genreContainer.appendChild(fallbackGrid);
+                    }
+                }
+            }
+
+        // Initialize Splitting
+        if (typeof Splitting !== 'undefined') {
+            const splittingElements = document.querySelectorAll('[data-splitting]');
+            if (splittingElements.length > 0) {
+                Splitting();
+                    
+                    // Add animation class after a short delay
+                    setTimeout(() => {
+                        document.querySelectorAll('.splitting').forEach(el => {
+                            el.classList.add('animated');
+                        });
+                    }, 500);
+            }
+        }
+
+        // GSAP Animations with reduced motion check
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && typeof gsap !== 'undefined') {
+            gsap.from('.hero-content', {
+                duration: 1,
+                y: 100,
+                opacity: 0,
+                ease: 'power4.out'
+            });
+
+            gsap.to('.sound-wave-bar', {
+                duration: 1,
+                scaleY: 1.5,
+                yoyo: true,
+                repeat: -1,
+                ease: 'power1.inOut',
+                stagger: {
+                    each: 0.2,
+                    repeat: -1
+                }
+            });
+        }
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return; // Skip if it's just a "#" link
+                    
+                e.preventDefault();
+                    const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                });
+            });
+            
+            // Add loading="lazy" to all images for better performance
+            document.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('loading')) {
+                    img.setAttribute('loading', 'lazy');
+                }
+            });
+
+            // Add image error handling
+            document.querySelectorAll('.genre-card img').forEach(img => {
+                img.onerror = function() {
+                    // Set a fallback gradient background if image fails to load
+                    const genreType = this.closest('.genre-card').getAttribute('data-genre');
+                    this.style.display = 'none';
+                    this.closest('.genre-card').style.background = 'linear-gradient(45deg, #8E2DE2, #4A00E0)';
+                    
+                    // Add a fallback icon based on genre
+                    const iconElement = document.createElement('i');
+                    iconElement.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -80%); font-size: 60px; color: rgba(255,255,255,0.8); z-index: 2;';
+                    
+                    // Select appropriate icon for each genre
+                    switch(genreType) {
+                        case 'rock':
+                            iconElement.className = 'fas fa-guitar';
+                            break;
+                        case 'hiphop':
+                            iconElement.className = 'fas fa-microphone';
+                            break;
+                        case 'electronic':
+                            iconElement.className = 'fas fa-sliders-h';
+                            break;
+                        case 'jazz':
+                            iconElement.className = 'fas fa-saxophone';
+                            if (!iconElement.offsetWidth) { // If saxophone icon not available
+                                iconElement.className = 'fas fa-music';
+                            }
+                            break;
+                        case 'classical':
+                            iconElement.className = 'fas fa-violin';
+                            if (!iconElement.offsetWidth) { // If violin icon not available
+                                iconElement.className = 'fas fa-music';
+                            }
+                            break;
+                        case 'country':
+                            iconElement.className = 'fas fa-hat-cowboy';
+                            if (!iconElement.offsetWidth) { // If cowboy hat icon not available
+                                iconElement.className = 'fas fa-music';
+                            }
+                            break;
+                        default:
+                            iconElement.className = 'fas fa-music';
+                    }
+                    
+                    this.closest('.genre-card').appendChild(iconElement);
+                };
+            });
+
+            // Skip link functionality for accessibility
+            const skipLink = document.querySelector('.skip-link');
+            if (skipLink) {
+                skipLink.addEventListener('focus', function() {
+                    this.style.top = '10px';
+                });
+                
+                skipLink.addEventListener('blur', function() {
+                    this.style.top = '-40px';
+                });
+            }
+            
+            // Add aria-labels to improve accessibility
+            document.querySelectorAll('.genre-card').forEach(card => {
+                const genre = card.getAttribute('data-genre');
+                const heading = card.querySelector('h3')?.textContent || genre;
+                card.setAttribute('aria-label', `${heading} music genre`);
+            });
+            
+            // Enhance focus styles for keyboard navigation
+            document.querySelectorAll('a, button').forEach(element => {
+                element.addEventListener('focus', function() {
+                    this.style.outline = '2px solid var(--primary)';
+                    this.style.outlineOffset = '3px';
+                });
+                
+                element.addEventListener('blur', function() {
+                    this.style.outline = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
